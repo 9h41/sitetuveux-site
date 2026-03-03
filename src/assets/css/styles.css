@@ -528,3 +528,304 @@ button { width: auto; }
     transform: none !important;
   }
 }
+
+.offer-page {
+  max-width: 1422px;
+  margin: 0 auto;
+  padding: 2.8rem 0 0.4rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+}
+
+.offer-top-logo img {
+  width: 146px;
+  height: auto;
+  display: block;
+}
+
+.offer-title {
+  margin: 1.65rem 0 1.35rem;
+  font-size: 52px;
+  line-height: 1.08;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.offer-accordion {
+  margin-bottom: 1.8rem;
+}
+
+.offer-item {
+  border-top: 1px solid rgba(32, 33, 36, 0.34);
+}
+
+.offer-item:last-child {
+  border-bottom: 1px solid rgba(32, 33, 36, 0.34);
+}
+
+.offer-item h2 {
+  margin: 0;
+}
+
+.offer-trigger {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  padding: 0.58rem 0;
+}
+
+.offer-sign {
+  width: 1.2em;
+  display: inline-block;
+  text-align: center;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.offer-panel {
+  padding-bottom: 0.12rem;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: height 360ms ease, opacity 260ms ease;
+  will-change: height, opacity;
+}
+
+.offer-item.is-open .offer-panel {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-panel {
+    transition: none;
+  }
+}
+
+.offer-row {
+  margin: 0;
+  padding: 0.43rem 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  font-size: 16px;
+  line-height: 1.52;
+}
+
+.offer-row span {
+  color: rgba(32, 33, 36, 0.9);
+}
+
+.offer-row strong {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.offer-steps {
+  margin-top: 2.95rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 20px;
+  grid-auto-rows: 432px;
+}
+
+.offer-step {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 20px;
+  overflow: visible;
+  padding-top: 70px;
+}
+
+.offer-step-card {
+  width: 339px;
+  min-height: 231px;
+  padding: 22px 8px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: visible;
+}
+
+.offer-step.step-top-a .offer-step-card { padding-top: 24px; }
+.offer-step.step-top-b .offer-step-card { padding-top: 23px; }
+.offer-step.step-top-c .offer-step-card { padding-top: 21px; }
+.offer-step.step-top-d .offer-step-card { padding-top: 22px; }
+.offer-step.step-top-e .offer-step-card { padding-top: 23px; }
+.offer-step.step-top-f .offer-step-card { padding-top: 22px; }
+
+.offer-step-card h3 {
+  margin: 8px 0 10px;
+  font-size: 21px;
+  line-height: 29.4px;
+  font-weight: 400;
+  width: 100%;
+  max-width: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal !important;
+  transition: transform 280ms ease;
+}
+
+.offer-step-card p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 25.6px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal !important;
+  overflow-wrap: anywhere;
+  transition: transform 280ms ease;
+}
+
+.offer-step-card p:not(.offer-kicker) {
+  width: 100%;
+  padding: 0;
+}
+
+.offer-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  transition: transform 280ms ease;
+}
+
+.offer-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.offer-icon path {
+  fill: currentColor;
+  stroke: none;
+}
+
+.offer-kicker {
+  margin-top: auto !important;
+  font-size: 16px !important;
+  line-height: 25.6px !important;
+  font-style: normal;
+}
+
+.offer-step:hover .offer-step-card h3,
+.offer-step:hover .offer-step-card p,
+.offer-step:focus-within .offer-step-card h3,
+.offer-step:focus-within .offer-step-card p {
+  transform: translateY(-16px);
+}
+
+.offer-step:hover .offer-icon,
+.offer-step:focus-within .offer-icon {
+  transform: translateY(-16px) rotate(10deg);
+}
+
+.offer-steps-intro {
+  margin: 0.35rem 0 1.95rem;
+  font-size: 18px;
+  line-height: 1.35;
+  font-style: italic;
+}
+
+.offer-steps-title {
+  margin: 0;
+  font-size: 52px;
+  line-height: 1.04;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.offer-step.tone-gray {
+  background-image: conic-gradient(from 152deg, rgba(204, 211, 236, 0.3) 0%, rgba(204, 211, 236, 0.3) 0%, rgba(245, 193, 176, 0.3) 53.9474%, rgba(204, 211, 236, 0.3) 90.7621%);
+  border-radius: 20px;
+}
+
+.offer-step.tone-gray .offer-step-card {
+  background: transparent;
+}
+
+.offer-step.tone-pink {
+  background-image: conic-gradient(from 152deg, rgba(204, 211, 236, 0.62) 0%, rgba(249, 197, 180, 0.62) 61.3932%, rgba(204, 211, 236, 0.62) 98.2833%);
+  border-radius: 23.625px;
+}
+
+.offer-step.tone-pink .offer-step-card {
+  background: transparent;
+}
+
+.offer-step.tone-yellow {
+  background-image: conic-gradient(from 152deg, rgba(204, 211, 236, 0.3) 0%, rgba(204, 211, 236, 0.3) 0%, rgba(245, 193, 176, 0.3) 53.9474%, rgba(204, 211, 236, 0.3) 90.7621%);
+  border-radius: 20px;
+}
+
+.offer-step.tone-yellow .offer-step-card {
+  background: transparent;
+}
+
+@media (max-width: 980px) {
+  .offer-page {
+    padding-top: 1.5rem;
+    max-width: 1180px;
+  }
+  .offer-title {
+    font-size: 36px;
+  }
+  .offer-trigger {
+    font-size: 18px;
+  }
+  .offer-steps {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    grid-auto-rows: auto;
+  }
+  .offer-step-card {
+    width: min(100%, 560px);
+    min-height: 0;
+    padding: 28px 20px 20px;
+    margin: 0 auto;
+  }
+  .offer-step-card h3 {
+    font-size: 36px;
+  }
+}
+
+.page-offer .site-header .brand {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+.page-offer.scrolled-past-hero-logo .site-header .brand {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.page-offer .header-inner {
+  justify-content: space-between;
+}
+
+.page-offer .nav-list {
+  gap: 1.55rem;
+}
+
+.page-offer .nav-list a {
+  font-size: 10px;
+  font-style: normal;
+}

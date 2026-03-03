@@ -3,7 +3,7 @@
   <head>
     {% include "partials/head.njk" %}
   </head>
-  <body class="{% if page.url == '/' %}page-home{% else %}page-inner{% endif %}">
+  <body class="{% if page.url == '/' %}page-home{% else %}page-inner{% endif %}{% if page.url == '/notreoffre/' or page.url == '/notre-offre/' %} page-offer{% endif %}">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <header class="site-header">
       <div class="container header-inner">
@@ -62,8 +62,11 @@
 
     <script>
       (function () {
-        if (!document.body.classList.contains("page-home")) return;
-        var heroLogo = document.querySelector(".home-logo");
+        var isHome = document.body.classList.contains("page-home");
+        var isOffer = document.body.classList.contains("page-offer");
+        if (!isHome && !isOffer) return;
+
+        var heroLogo = document.querySelector(".home-logo, .offer-top-logo");
         if (!heroLogo) return;
 
         var onChange = function (isVisible) {
@@ -224,6 +227,91 @@
             };
             window.requestAnimationFrame(tick);
           }
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        var accordions = document.querySelectorAll("[data-offer-accordion]");
+        accordions.forEach(function (accordion) {
+          var items = Array.from(accordion.querySelectorAll(".offer-item"));
+          if (!items.length) return;
+          var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+          var stopTransition = function (panel) {
+            panel.style.transition = "none";
+            panel.getBoundingClientRect();
+            panel.style.transition = "";
+          };
+
+          var animatePanel = function (panel, open, immediate) {
+            if (!panel) return;
+            panel.__offerAnimSeq = (panel.__offerAnimSeq || 0) + 1;
+            var seq = panel.__offerAnimSeq;
+            if (immediate || reduceMotion) {
+              panel.hidden = !open;
+              panel.style.height = open ? "auto" : "0px";
+              panel.style.opacity = open ? "1" : "0";
+              return;
+            }
+            if (open) {
+              panel.hidden = false;
+              stopTransition(panel);
+              panel.style.height = "0px";
+              panel.style.opacity = "0";
+              panel.getBoundingClientRect();
+              panel.style.height = panel.scrollHeight + "px";
+              panel.style.opacity = "1";
+              var onOpenEnd = function (evt) {
+                if (seq !== panel.__offerAnimSeq) return;
+                if (evt.target !== panel || evt.propertyName !== "height") return;
+                panel.removeEventListener("transitionend", onOpenEnd);
+                panel.style.height = "auto";
+              };
+              panel.addEventListener("transitionend", onOpenEnd);
+            } else {
+              stopTransition(panel);
+              panel.style.height = panel.scrollHeight + "px";
+              panel.style.opacity = "1";
+              panel.getBoundingClientRect();
+              panel.style.height = "0px";
+              panel.style.opacity = "0";
+              var onCloseEnd = function (evt) {
+                if (seq !== panel.__offerAnimSeq) return;
+                if (evt.target !== panel || evt.propertyName !== "height") return;
+                panel.removeEventListener("transitionend", onCloseEnd);
+                panel.hidden = true;
+              };
+              panel.addEventListener("transitionend", onCloseEnd);
+            }
+          };
+
+          var setState = function (item, open, immediate) {
+            var btn = item.querySelector(".offer-trigger");
+            var panel = item.querySelector(".offer-panel");
+            var sign = item.querySelector(".offer-sign");
+            if (!btn || !panel || !sign) return;
+            item.classList.toggle("is-open", open);
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+            animatePanel(panel, open, immediate);
+            sign.textContent = open ? "−" : "+";
+          };
+
+          items.forEach(function (item) {
+            setState(item, item.classList.contains("is-open"), true);
+          });
+
+          items.forEach(function (item) {
+            var btn = item.querySelector(".offer-trigger");
+            if (!btn) return;
+            btn.addEventListener("click", function () {
+              var isOpen = item.classList.contains("is-open");
+              items.forEach(function (other) {
+                if (other !== item) setState(other, false, false);
+              });
+              setState(item, !isOpen, false);
+            });
+          });
         });
       })();
     </script>
