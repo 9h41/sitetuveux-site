@@ -1,0 +1,10 @@
+{
+  "name": "Site tu veux",
+  "domain": "https://sitetuveux.com",
+  "lang": "fr",
+  "locale": "fr_FR",
+  "description": "Site tu veux, agence de création de site internet, référencement, marque, logo, pour devenir visible, en mieux !",
+  "author": "Site tu veux",
+  "email": "contact@sitetuveux.com",
+  "socialImage": "/assets/images/hero.jpg"
+}

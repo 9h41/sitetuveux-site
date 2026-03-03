@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Site Tu Veux</title>
+  <desc id="desc">Création et refonte de sites web simples, rapides et utiles.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f0e8"/>
+      <stop offset="1" stop-color="#efe9dc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="72" y="72" width="1056" height="486" rx="24" fill="#fffefa" stroke="#d8d1c6"/>
+  <text x="120" y="260" font-size="64" font-family="Avenir, Arial, sans-serif" font-weight="700" fill="#161411">Site Tu Veux</text>
+  <text x="120" y="340" font-size="34" font-family="Avenir, Arial, sans-serif" fill="#5a544b">Des sites web clairs, rapides et durables.</text>
+</svg>

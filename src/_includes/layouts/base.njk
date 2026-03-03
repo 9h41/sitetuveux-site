@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+  <head>
+    {% include "partials/head.njk" %}
+  </head>
+  <body class="{% if page.url == '/' %}page-home{% else %}page-inner{% endif %}">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="Accueil">
+          <img src="/assets/images/logo-sitetuveux.png" alt="Site tu veux" />
+        </a>
+        <nav aria-label="Navigation principale">
+          <ul class="nav-list">
+            <li><a href="/" {% if page.url == '/' %}aria-current="page"{% endif %}>Accueil</a></li>
+            {% for navPage in collections.navPages %}
+              {% if navPage.url != '/' %}
+                <li><a href="{{ navPage.url }}" {% if page.url == navPage.url %}aria-current="page"{% endif %}>{{ navPage.data.navLabel or navPage.data.title }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="container page-content">
+      {{ content | safe }}
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-hero">
+          <a class="footer-mailto" href="mailto:contact@sitetuveux.com" aria-label="Contacter Site tu veux par email">
+            <h3 class="callout">
+              <span>Faisons de belles</span>
+              <span>choses ensemble</span>
+            </h3>
+          </a>
+          <a class="footer-mailbox" href="mailto:contact@sitetuveux.com" aria-label="Contacter Site tu veux par email">
+            <svg data-bbox="14.026 30 171.974 140" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" data-type="color" aria-hidden="true" focusable="false">
+              <g>
+                <path d="M186 92c0-17-13.3-30.9-30.2-30.9l-4.7-.1v-8H185l-12.3-11.3L185 30h-41.9v31l-69.7.1c-17 0-31 13.9-31 30.9v33H20.5v22h90.8v23l24.8-.2.1-22.8H186V92zM50.4 92c0-12.7 10.4-23.1 23-23.1s22.9 10.3 22.9 23l-.1 33.1H50.4V92zm45.8 47H28.4v-6h67.8v6zm32 23h-9v-15h9v15zm49.8-23h-73.8l-.1-47.1c0-9.1-4-17.3-10.4-23l49.4.1v9c-2.8 1.4-4.4 4.6-4.4 8 0 4.7 3.8 8.6 8.6 8.6s8.6-3.8 8.6-8.6c0-3.3-1.9-6.5-4.7-8v-9l4.7-.1c12.7 0 22.2 10.5 22.2 23.1l-.1 47z" fill="#fed257" data-color="1"></path>
+                <path fill="#fed257" d="M52.8 36.9l7.5-2 4.2 15.5-7.5 2-4.2-15.5z" data-color="1"></path>
+                <path fill="#fed257" d="M28.6 53.3l5.5-5.5 11.4 11.4-5.5 5.5-11.4-11.4z" data-color="1"></path>
+                <path fill="#fed257" d="M15.6 79.7l2-7.5 15.5 4.1-2 7.6-15.5-4.2z" data-color="1"></path>
+                <path fill="#fed257" d="M29.96 96.187l1.116 7.72-15.934 2.305-1.116-7.72 15.934-2.305z" data-color="1"></path>
+              </g>
+            </svg>
+          </a>
+        </div>
+        <div class="footer-col footer-social">
+          <p><a href="https://www.linkedin.com/company/9heures41" rel="noopener noreferrer" target="_blank">LinkedIn</a></p>
+          <p><a href="https://www.instagram.com/9heures41" rel="noopener noreferrer" target="_blank">Instagram</a></p>
+        </div>
+        <div class="footer-col footer-legal">
+          <p><a href="/notrevision/">A propos de Site tu veux</a></p>
+          <p><a href="/accessibilitystatement/">Déclaration d'accessibilité</a></p>
+          <p><a href="/confidentialite/">Politique de confidentialité</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        if (!document.body.classList.contains("page-home")) return;
+        var heroLogo = document.querySelector(".home-logo");
+        if (!heroLogo) return;
+
+        var onChange = function (isVisible) {
+          document.body.classList.toggle("scrolled-past-hero-logo", !isVisible);
+        };
+
+        if ("IntersectionObserver" in window) {
+          var observer = new IntersectionObserver(function (entries) {
+            onChange(entries[0].isIntersecting);
+          }, { threshold: 0.05 });
+          observer.observe(heroLogo);
+        } else {
+          var fallback = function () {
+            var rect = heroLogo.getBoundingClientRect();
+            var inView = rect.bottom > 0 && rect.top < window.innerHeight;
+            onChange(inView);
+          };
+          fallback();
+          window.addEventListener("scroll", fallback, { passive: true });
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var autoplayEnabled = true;
+        var carousels = document.querySelectorAll(".logo-carousel");
+        carousels.forEach(function (carousel) {
+          var rail = carousel.querySelector(".logo-rail");
+          var firstTrack = carousel.querySelector(".logo-track.primary");
+          var viewport = carousel.querySelector(".logo-viewport");
+          var firstItem = firstTrack ? firstTrack.querySelector("img") : null;
+          var prev = carousel.querySelector(".carousel-arrow.prev");
+          var next = carousel.querySelector(".carousel-arrow.next");
+          if (!rail || !firstTrack || !viewport || !firstItem) return;
+
+          var x = 0;
+          var paused = false;
+          var cycle = 0;
+          var gap = 100;
+          var itemStep = 500;
+          var itemCount = 1;
+          var initialized = false;
+          var isManualAnimating = false;
+          var speed = 0.55;
+          var manualUntil = 0;
+
+          var normalizeX = function () {
+            if (!cycle) return;
+            while (x < -2 * cycle) x += cycle;
+            while (x > -cycle) x -= cycle;
+          };
+
+          var currentTranslateX = function () {
+            var t = window.getComputedStyle(rail).transform;
+            if (!t || t === "none") return x;
+            var m2d = t.match(/^matrix\((.+)\)$/);
+            if (m2d) {
+              var parts = m2d[1].split(",").map(function (v) { return parseFloat(v.trim()); });
+              return parts.length >= 6 ? parts[4] : x;
+            }
+            var m3d = t.match(/^matrix3d\((.+)\)$/);
+            if (m3d) {
+              var p = m3d[1].split(",").map(function (v) { return parseFloat(v.trim()); });
+              return p.length >= 16 ? p[12] : x;
+            }
+            return x;
+          };
+
+          var snapToItem = function (value) {
+            if (!itemStep) return value;
+            return Math.round(value / itemStep) * itemStep;
+          };
+
+          var recalc = function () {
+            var railStyle = window.getComputedStyle(rail);
+            gap = parseFloat(railStyle.gap || railStyle.columnGap || "100") || 100;
+            var imgs = firstTrack.querySelectorAll("img");
+            itemCount = Math.max(1, imgs.length);
+            if (imgs.length > 1) {
+              var a = imgs[0].getBoundingClientRect();
+              var b = imgs[1].getBoundingClientRect();
+              itemStep = Math.abs(b.left - a.left);
+            } else {
+              itemStep = firstItem.getBoundingClientRect().width + gap;
+            }
+            cycle = itemStep * itemCount;
+            if (!cycle) cycle = firstTrack.getBoundingClientRect().width + gap;
+            if (!initialized) {
+              x = -cycle;
+              initialized = true;
+            } else {
+              x = snapToItem(currentTranslateX());
+            }
+            normalizeX();
+            rail.style.transform = "translate3d(" + x + "px, 0, 0)";
+          };
+
+          var nudge = function (direction) {
+            if (isManualAnimating) return;
+            x = currentTranslateX();
+            x = snapToItem(x);
+            normalizeX();
+            var target = x + direction * itemStep;
+
+            isManualAnimating = true;
+            manualUntil = window.performance.now() + 450;
+
+            var settled = false;
+            var settle = function () {
+              if (settled) return;
+              settled = true;
+              rail.removeEventListener("transitionend", onEnd);
+              x = target;
+              normalizeX();
+              rail.style.transition = "none";
+              rail.style.transform = "translate3d(" + x + "px, 0, 0)";
+              rail.getBoundingClientRect();
+              rail.style.transition = "";
+              isManualAnimating = false;
+              manualUntil = 0;
+            };
+
+            var onEnd = function (evt) {
+              if (evt && evt.target !== rail) return;
+              if (evt && evt.propertyName && evt.propertyName !== "transform") return;
+              settle();
+            };
+
+            rail.addEventListener("transitionend", onEnd);
+            window.setTimeout(settle, 480);
+            rail.style.transition = "transform 420ms cubic-bezier(0.22, 1, 0.36, 1)";
+            rail.style.transform = "translate3d(" + target + "px, 0, 0)";
+          };
+
+          if (prev) prev.addEventListener("click", function () { nudge(1); });
+          if (next) next.addEventListener("click", function () { nudge(-1); });
+
+          carousel.addEventListener("mouseenter", function () { paused = true; });
+          carousel.addEventListener("mouseleave", function () { paused = false; });
+          carousel.addEventListener("focusin", function () { paused = true; });
+          carousel.addEventListener("focusout", function () { paused = false; });
+
+          recalc();
+          window.addEventListener("resize", recalc);
+          if ("ResizeObserver" in window) {
+            new ResizeObserver(recalc).observe(firstTrack);
+          }
+
+          if (autoplayEnabled && !reduceMotion) {
+            var tick = function () {
+              if (!paused && !isManualAnimating && window.performance.now() > manualUntil) {
+                x -= speed;
+                normalizeX();
+                rail.style.transform = "translate3d(" + x + "px, 0, 0)";
+              }
+              window.requestAnimationFrame(tick);
+            };
+            window.requestAnimationFrame(tick);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
