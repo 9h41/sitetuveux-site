@@ -968,3 +968,183 @@ button { width: auto; }
     font-size: 34px;
   }
 }
+
+.contact-page {
+  max-width: 1244px;
+  margin: 0 auto;
+  padding: 0.2rem 0 0.6rem;
+}
+
+.contact-top-logo img {
+  width: 248px;
+  height: auto;
+  display: block;
+}
+
+.contact-marquee-wrap {
+  margin-top: 3.4rem;
+  overflow: hidden;
+}
+
+.contact-marquee {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 49px;
+  line-height: 1;
+  font-style: italic;
+  font-family: "Times New Roman", "Georgia", serif;
+  color: rgb(214, 170, 86);
+  transform: translateX(-22%);
+}
+
+.contact-marquee .sep {
+  display: inline-block;
+  margin: 0 18px;
+  font-size: 0.45em;
+  transform: translateY(-0.08em);
+}
+
+.contact-card {
+  width: 100%;
+  max-width: 530px;
+  margin: 3.35rem auto 0;
+  background: var(--bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(24, 21, 16, 0.18);
+  padding: 1.7rem 6px 1.8rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  font-size: 12px;
+  line-height: 1;
+  color: rgb(77, 74, 72);
+  margin: 0.2rem 0 0.52rem;
+  font-family: "Wix Madefor Text", Arial, Helvetica, sans-serif;
+}
+
+.contact-form input,
+.contact-form textarea {
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid rgba(57, 55, 52, 0.3);
+  background: transparent;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 24px;
+  padding: 0 0 0.62rem;
+  outline: none;
+  font-family: "Wix Madefor Text", Arial, Helvetica, sans-serif;
+  border-radius: 0;
+}
+
+.contact-form input {
+  height: 40px;
+  margin-bottom: 1.4rem;
+}
+
+.contact-form textarea {
+  min-height: 75px;
+  resize: vertical;
+  margin-bottom: 2rem;
+}
+
+.contact-form button {
+  align-self: flex-end;
+  min-width: 252px;
+  height: 50px;
+  border: 0;
+  background: rgb(32, 33, 36);
+  color: rgb(237, 189, 92);
+  font-size: 20px;
+  line-height: 1.3;
+  font-family: "Wix Madefor Text", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.contact-thanks {
+  width: 106px;
+  height: 106px;
+  background: rgb(232, 191, 104);
+  color: #fff;
+  margin: 1.55rem auto 0;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  font-family: "Times New Roman", "Georgia", serif;
+  clip-path: polygon(50% 0%, 61% 7%, 75% 1%, 82% 12%, 96% 14%, 93% 28%, 100% 40%, 89% 50%, 100% 60%, 93% 72%, 96% 86%, 82% 88%, 75% 99%, 61% 93%, 50% 100%, 39% 93%, 25% 99%, 18% 88%, 4% 86%, 7% 72%, 0% 60%, 11% 50%, 0% 40%, 7% 28%, 4% 14%, 18% 12%, 25% 1%, 39% 7%);
+}
+
+.page-contact .site-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background: transparent;
+}
+
+.page-contact .site-header .container {
+  width: min(100% - 2rem, 1244px);
+}
+
+.page-contact .site-header .brand {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+.page-contact.scrolled-past-hero-logo .site-header .brand {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.page-contact .header-inner {
+  justify-content: space-between;
+  min-height: 76px;
+}
+
+.page-contact .nav-list {
+  gap: 1.55rem;
+}
+
+.page-contact .nav-list a {
+  font-size: 10px;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: normal;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+}
+
+@media (max-width: 980px) {
+  .contact-top-logo img {
+    width: 200px;
+  }
+
+  .contact-marquee {
+    font-size: 30px;
+    transform: translateX(-8%);
+  }
+
+  .contact-card {
+    max-width: 100%;
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+  }
+
+  .contact-form button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .contact-thanks {
+    width: 88px;
+    height: 88px;
+    font-size: 28px;
+  }
+}

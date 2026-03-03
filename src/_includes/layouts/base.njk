@@ -3,7 +3,7 @@
   <head>
     {% include "partials/head.njk" %}
   </head>
-  <body class="{% if page.url == '/' %}page-home{% else %}page-inner{% endif %}{% if page.url == '/notreoffre/' or page.url == '/notre-offre/' %} page-offer{% endif %}{% if page.url == '/clients/' or page.url == '/nos-clients/' %} page-clients{% endif %}">
+  <body class="{% if page.url == '/' %}page-home{% else %}page-inner{% endif %}{% if page.url == '/notreoffre/' or page.url == '/notre-offre/' %} page-offer{% endif %}{% if page.url == '/clients/' or page.url == '/nos-clients/' %} page-clients{% endif %}{% if page.url == '/contact/' %} page-contact{% endif %}">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <header class="site-header">
       <div class="container header-inner">
@@ -65,9 +65,10 @@
         var isHome = document.body.classList.contains("page-home");
         var isOffer = document.body.classList.contains("page-offer");
         var isClients = document.body.classList.contains("page-clients");
-        if (!isHome && !isOffer && !isClients) return;
+        var isContact = document.body.classList.contains("page-contact");
+        if (!isHome && !isOffer && !isClients && !isContact) return;
 
-        var heroLogo = document.querySelector(".home-logo, .offer-top-logo, .clients-top-logo");
+        var heroLogo = document.querySelector(".home-logo, .offer-top-logo, .clients-top-logo, .contact-top-logo");
         if (!heroLogo) return;
 
         var onChange = function (isVisible) {
