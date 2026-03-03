@@ -3,7 +3,7 @@
   <head>
     {% include "partials/head.njk" %}
   </head>
-  <body class="{% if page.url == '/' %}page-home{% else %}page-inner{% endif %}{% if page.url == '/notreoffre/' or page.url == '/notre-offre/' %} page-offer{% endif %}">
+  <body class="{% if page.url == '/' %}page-home{% else %}page-inner{% endif %}{% if page.url == '/notreoffre/' or page.url == '/notre-offre/' %} page-offer{% endif %}{% if page.url == '/clients/' or page.url == '/nos-clients/' %} page-clients{% endif %}">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <header class="site-header">
       <div class="container header-inner">
@@ -64,9 +64,10 @@
       (function () {
         var isHome = document.body.classList.contains("page-home");
         var isOffer = document.body.classList.contains("page-offer");
-        if (!isHome && !isOffer) return;
+        var isClients = document.body.classList.contains("page-clients");
+        if (!isHome && !isOffer && !isClients) return;
 
-        var heroLogo = document.querySelector(".home-logo, .offer-top-logo");
+        var heroLogo = document.querySelector(".home-logo, .offer-top-logo, .clients-top-logo");
         if (!heroLogo) return;
 
         var onChange = function (isVisible) {
