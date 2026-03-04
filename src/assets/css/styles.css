@@ -62,6 +62,10 @@ body {
   background: var(--bg);
 }
 
+.site-header .container {
+  width: min(100% - 2rem, 1244px);
+}
+
 .header-inner {
   min-height: 66px;
   display: flex;
@@ -141,12 +145,12 @@ body.page-home.scrolled-past-hero-logo .site-header .brand {
 .home-logo {
   grid-column: 1 / -1;
   grid-row: 1;
-  padding-top: 1.4rem;
+  padding-top: 0.2rem;
   animation: motionFadeIn 500ms ease both;
 }
 
 .home-logo img {
-  width: clamp(220px, 15vw, 270px);
+  width: 248px;
   height: auto;
   display: block;
 }
@@ -530,15 +534,15 @@ button { width: auto; }
 }
 
 .offer-page {
-  max-width: 1422px;
+  max-width: 1244px;
   margin: 0 auto;
-  padding: 2.8rem 0 0.4rem;
+  padding: 0.2rem 0 0.4rem;
   font-family: Arial, Helvetica, sans-serif;
   font-style: normal;
 }
 
 .offer-top-logo img {
-  width: 146px;
+  width: 248px;
   height: auto;
   display: block;
 }
@@ -811,23 +815,28 @@ button { width: auto; }
   pointer-events: none;
 }
 
+.page-home .site-header,
+.page-offer .site-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background: transparent;
+}
+
+.page-home .site-header .container,
+.page-offer .site-header .container {
+  width: min(100% - 2rem, 1244px);
+}
+
+.page-home .page-content {
+  width: min(100% - 2rem, 1244px);
+  margin-inline: auto;
+}
+
 .page-offer.scrolled-past-hero-logo .site-header .brand {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-}
-
-.page-offer .header-inner {
-  justify-content: space-between;
-}
-
-.page-offer .nav-list {
-  gap: 1.55rem;
-}
-
-.page-offer .nav-list a {
-  font-size: 10px;
-  font-style: normal;
 }
 
 .clients-page {
@@ -926,17 +935,14 @@ button { width: auto; }
 }
 
 .page-clients .nav-list {
-  gap: 1.55rem;
+  gap: 2rem;
 }
 
 .page-clients .nav-list a {
-  font-size: 10px;
-  font-style: normal;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: normal;
-  display: inline-flex;
-  align-items: center;
-  min-height: 38px;
+  font-size: 14px;
+  font-style: italic;
+  font-family: "Wix Madefor Text", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  line-height: 21.84px;
 }
 
 @media (max-width: 980px) {
@@ -988,30 +994,45 @@ button { width: auto; }
 
 .contact-marquee {
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
   white-space: nowrap;
   font-size: 49px;
   line-height: 1;
   font-style: italic;
   font-family: "Times New Roman", "Georgia", serif;
   color: rgb(214, 170, 86);
-  transform: translateX(-22%);
+  animation: contactMarqueeShiftFast 14s linear infinite;
+}
+
+.contact-marquee-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding-right: 18px;
 }
 
 .contact-marquee .sep {
   display: inline-block;
-  margin: 0 18px;
   font-size: 0.45em;
   transform: translateY(-0.08em);
 }
 
+@keyframes contactMarqueeShiftFast {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
 .contact-card {
   width: 100%;
-  max-width: 530px;
-  margin: 3.35rem auto 0;
+  max-width: 580px;
+  margin: 3.17rem auto 0;
   background: var(--bg);
-  border-radius: 12px;
-  box-shadow: 0 10px 24px rgba(24, 21, 16, 0.18);
-  padding: 1.7rem 6px 1.8rem;
+  border-radius: 16px;
+  box-shadow: 0 0 25px 8px rgba(32, 33, 36, 0.15);
+  padding: 24px;
+  transform: translateX(-4px);
 }
 
 .contact-form {
@@ -1020,10 +1041,11 @@ button { width: auto; }
 }
 
 .contact-form label {
-  font-size: 12px;
-  line-height: 1;
-  color: rgb(77, 74, 72);
-  margin: 0.2rem 0 0.52rem;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 19.6px;
+  color: rgb(32, 33, 36);
+  margin: 0 0 8px;
   font-family: "Wix Madefor Text", Arial, Helvetica, sans-serif;
 }
 
@@ -1036,7 +1058,7 @@ button { width: auto; }
   color: var(--text);
   font-size: 16px;
   line-height: 24px;
-  padding: 0 0 0.62rem;
+  padding: 8px 2px 8px 0;
   outline: none;
   font-family: "Wix Madefor Text", Arial, Helvetica, sans-serif;
   border-radius: 0;
@@ -1044,21 +1066,25 @@ button { width: auto; }
 
 .contact-form input {
   height: 40px;
-  margin-bottom: 1.4rem;
+  margin-bottom: 29px;
+  width: 100%;
 }
 
 .contact-form textarea {
   min-height: 75px;
-  resize: vertical;
-  margin-bottom: 2rem;
+  resize: none;
+  margin-bottom: 25px;
+  margin-top: 0;
+  width: 100%;
 }
 
 .contact-form button {
   align-self: flex-end;
   min-width: 252px;
   height: 50px;
-  border: 0;
-  background: rgb(32, 33, 36);
+  border: 2px solid rgb(237, 189, 92);
+  border-radius: 100px;
+  background: transparent;
   color: rgb(237, 189, 92);
   font-size: 20px;
   line-height: 1.3;
@@ -1067,16 +1093,45 @@ button { width: auto; }
 }
 
 .contact-thanks {
-  width: 106px;
-  height: 106px;
-  background: rgb(232, 191, 104);
-  color: #fff;
-  margin: 1.55rem auto 0;
+  position: relative;
+  width: 166px;
+  height: 166px;
+  margin: 4.4rem auto 0;
   display: grid;
   place-items: center;
-  font-size: 34px;
   font-family: "Times New Roman", "Georgia", serif;
-  clip-path: polygon(50% 0%, 61% 7%, 75% 1%, 82% 12%, 96% 14%, 93% 28%, 100% 40%, 89% 50%, 100% 60%, 93% 72%, 96% 86%, 82% 88%, 75% 99%, 61% 93%, 50% 100%, 39% 93%, 25% 99%, 18% 88%, 4% 86%, 7% 72%, 0% 60%, 11% 50%, 0% 40%, 7% 28%, 4% 14%, 18% 12%, 25% 1%, 39% 7%);
+}
+
+.contact-thanks svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform-origin: 50% 50%;
+  animation: contactThanksPulse 2s ease-in-out infinite;
+}
+
+.contact-thanks span {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-size: 36px;
+  line-height: 1;
+  transition: color 180ms ease;
+}
+
+.contact-thanks:hover span {
+  color: rgb(214, 170, 86);
+}
+
+@keyframes contactThanksPulse {
+  0% { transform: scale(1); }
+  12.5% { transform: scale(1.045); }
+  25% { transform: scale(1); }
+  37.5% { transform: scale(1.045); }
+  50% { transform: scale(1); }
+  100% { transform: scale(1); }
 }
 
 .page-contact .site-header {
@@ -1084,6 +1139,13 @@ button { width: auto; }
   left: 0;
   right: 0;
   background: transparent;
+}
+
+.page-home.scrolled-past-hero-logo .site-header,
+.page-offer.scrolled-past-hero-logo .site-header,
+.page-clients.scrolled-past-hero-logo .site-header,
+.page-contact.scrolled-past-hero-logo .site-header {
+  background: var(--bg);
 }
 
 .page-contact .site-header .container {
@@ -1108,17 +1170,14 @@ button { width: auto; }
 }
 
 .page-contact .nav-list {
-  gap: 1.55rem;
+  gap: 2rem;
 }
 
 .page-contact .nav-list a {
-  font-size: 10px;
-  font-style: normal;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: normal;
-  display: inline-flex;
-  align-items: center;
-  min-height: 38px;
+  font-size: 14px;
+  font-style: italic;
+  font-family: "Wix Madefor Text", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  line-height: 21.84px;
 }
 
 @media (max-width: 980px) {
