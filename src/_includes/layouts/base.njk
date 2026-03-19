@@ -146,6 +146,16 @@
           var recalc = function () {
             var railStyle = window.getComputedStyle(rail);
             gap = parseFloat(railStyle.gap || railStyle.columnGap || "100") || 100;
+            var mobileThreeUp = window.matchMedia && window.matchMedia("(max-width: 760px)").matches;
+            if (mobileThreeUp) {
+              var viewportWidth = viewport.getBoundingClientRect().width;
+              var visibleItems = 3;
+              var thumbSize = Math.floor((viewportWidth - gap * (visibleItems - 1)) / visibleItems);
+              thumbSize = Math.max(64, thumbSize);
+              carousel.style.setProperty("--logo-thumb-size", thumbSize + "px");
+            } else {
+              carousel.style.removeProperty("--logo-thumb-size");
+            }
             var imgs = firstTrack.querySelectorAll("img");
             itemCount = Math.max(1, imgs.length);
             if (imgs.length > 1) {

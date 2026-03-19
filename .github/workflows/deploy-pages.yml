@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "master", "staging"]
   workflow_dispatch:
 
 permissions:
@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      site_domain: ${{ steps.env.outputs.site_domain }}
+      cname: ${{ steps.env.outputs.cname }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,8 +33,27 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Resolve deployment environment
+        id: env
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "staging" ]; then
+            echo "site_domain=https://stg.sitetuveux.com" >> "$GITHUB_OUTPUT"
+            echo "cname=stg.sitetuveux.com" >> "$GITHUB_OUTPUT"
+            echo "site_env=staging" >> "$GITHUB_OUTPUT"
+          else
+            echo "site_domain=https://sitetuveux.com" >> "$GITHUB_OUTPUT"
+            echo "cname=sitetuveux.com" >> "$GITHUB_OUTPUT"
+            echo "site_env=production" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Build site
+        env:
+          SITE_DOMAIN: ${{ steps.env.outputs.site_domain }}
+          SITE_ENV: ${{ steps.env.outputs.site_env }}
         run: npm run build
+
+      - name: Set custom domain for deployment
+        run: echo "${{ steps.env.outputs.cname }}" > _site/CNAME
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

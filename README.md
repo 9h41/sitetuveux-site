@@ -31,7 +31,20 @@ Output is generated in `_site/`.
 
 ## Deployment
 
-Push to `main`; GitHub Actions builds and deploys to GitHub Pages.
+GitHub Actions builds and deploys to Pages on:
+- `master` / `main` -> `sitetuveux.com`
+- `staging` -> `stg.sitetuveux.com`
+
+Create/update staging branch and push:
+
+```bash
+git checkout -b staging
+git push -u origin staging
+```
+
+The workflow automatically sets:
+- `SITE_DOMAIN` for canonical/OG/sitemap URLs
+- `_site/CNAME` for the deployed custom domain
 
 ## DNS (manual)
 
@@ -44,3 +57,6 @@ At your DNS provider:
 - `www` as `CNAME` to `<your-github-username>.github.io`
 
 Then validate HTTPS in repository Pages settings.
+
+For staging DNS:
+- `stg` as `CNAME` to `<your-github-username>.github.io`

@@ -1,7 +1,12 @@
 ---
 permalink: /robots.txt
 ---
+{% if site.isStaging %}
+User-agent: *
+Disallow: /
+{% else %}
 User-agent: *
 Allow: /
+{% endif %}
 
 Sitemap: {{ site.domain }}/sitemap.xml
