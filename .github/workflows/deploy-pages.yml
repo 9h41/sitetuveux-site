@@ -41,9 +41,9 @@ jobs:
             echo "cname=stg.sitetuveux.com" >> "$GITHUB_OUTPUT"
             echo "site_env=staging" >> "$GITHUB_OUTPUT"
           else
-            echo "site_domain=https://stg.sitetuveux.com" >> "$GITHUB_OUTPUT"
-            echo "cname=stg.sitetuveux.com" >> "$GITHUB_OUTPUT"
-            echo "site_env=staging" >> "$GITHUB_OUTPUT"
+            echo "site_domain=https://www.sitetuveux.com" >> "$GITHUB_OUTPUT"
+            echo "cname=www.sitetuveux.com" >> "$GITHUB_OUTPUT"
+            echo "site_env=production" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Build site
